@@ -3,8 +3,23 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
-};
+  production: false,
+  firebase: {
+    apiKey: "AIzaSyC8rFD9SmvQs-XNIZZQIogg6GoMCNJUjUg",
+      authDomain: "logetudiant-5880f.firebaseapp.com",
+      databaseURL: "https://logetudiant-5880f.firebaseio.com",
+      projectId: "logetudiant-5880f",
+      storageBucket: "logetudiant-5880f.appspot.com",
+      messagingSenderId: "793086693127"
+    },
+  users_endpoit: 'users',
+  chats_endpoit: 'chats',
+
+  mapbox: {
+    accessToken: 'pk.eyJ1IjoiYWNlOTU0NTAiLCJhIjoiY2pxd2c3anpqMTJhajN4cHR5ZTE2Z2xxZCJ9.fk5CBUvAivS00i8vLHdCAA'
+  },
+
+}
 
 /*
  * For easier debugging in development mode, you can import the following file
