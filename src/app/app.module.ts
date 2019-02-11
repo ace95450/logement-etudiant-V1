@@ -16,6 +16,7 @@ import {AuthService} from './services/auth/auth.service';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import { DetailsItemComponent } from './components/details-item/details-item.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 export const firebaseConfig = environment.firebase;
 
 @NgModule({
@@ -25,6 +26,8 @@ export const firebaseConfig = environment.firebase;
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+      FormsModule,
+      ReactiveFormsModule,
     AngularFireModule.initializeApp(firebaseConfig),
       AngularFirestoreModule,
       AngularFireAuthModule

@@ -1,5 +1,4 @@
-<ion-content no-padding>
-  <ion-header>
+  <ion-header no-padding>
     <ion-toolbar>
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
@@ -16,7 +15,6 @@
       <ion-input type="search" placeholder="Où voulez-vous aller .."></ion-input>
     </form>
   </ion-item>
-</ion-content>
 
 
 <ion-content>
@@ -25,28 +23,28 @@
   </ion-text>
 
   <ion-slides pager="true" margin-bottom>
-    <ion-slide>
+    <ion-slide *ngFor="let immo of immos | slice:0:4; let i = index">
       <ion-grid no-padding>
         <ion-row>
           <ion-col size="12">
-            <ion-card class="hotelsCard" tappable routerLink="/details-item">
-              <ion-img src="https://images.pexels.com/photos/1397518/pexels-photo-1397518.jpeg?cs=srgb&dl=architecture-buildings-business-1397518.jpg&fm=jpg"></ion-img>
+            <ion-card class="hotelsCard" tappable routerLink="/details-item/{{immo.id}}">
+              <ion-img [src]="immo.thumb"></ion-img>
 
               <ion-card-subtitle>
                 <ion-badge color="warning">
-                  <ion-icon name="star"></ion-icon>
+                  <ion-icon name="star"></ion-icon> {{ immo.rating }}
                 </ion-badge>
               </ion-card-subtitle>
-              <ion-card-title color="light">Mon petit Paris</ion-card-title>
+              <ion-card-title color="light">{{ immo.name }}</ion-card-title>
               <div class="shadow"></div>
               <ion-card-content>
                 <ion-badge slot="start" color="dark" class="rooms">
                   <ion-icon name="book" color="secondary"></ion-icon>
-                  Label
+                  {{ immo.numb_available_rooms }} chambres dispo !
                 </ion-badge>
 
                 <ion-badge slot="end" color="success" class="price">
-                  <h3><strong>450€</strong></h3>
+                  <h3><strong>{{ immo.price | currency:'€':'code' }}</strong></h3>
                 </ion-badge>
               </ion-card-content>
             </ion-card>

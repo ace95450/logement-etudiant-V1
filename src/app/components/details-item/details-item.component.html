@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Détails
+      {{ immo.name }}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,15 +12,15 @@
 <ion-content class="animated fadeIn">
 
   <ion-slides pager="true" margin-bottom>
-    <ion-slide (click)="presentImage(image)">
-      <ion-img src="../../../assets/img/louvre-1210004_640.jpg"></ion-img>
+    <ion-slide *ngFor="let image of immo.images" (click)="presentImage(image)">
+      <ion-img [src]="image"></ion-img>
       <div class="shadow"></div>
     </ion-slide>
   </ion-slides>
 
   <div padding-horizontal>
 
-    <ion-segment color="primary">
+    <ion-segment [(ngModel)]="immoSegment" color="primary">
       <ion-segment-button value="details">
         <ion-label>Test 1</ion-label>
       </ion-segment-button>
@@ -32,8 +32,8 @@
       </ion-segment-button>
     </ion-segment>
 
-    <div>
-      <div>
+    <div [ngSwitch]="immoSegment">
+      <div *ngSwitchCase="'details'">
         <ion-card no-margin margin-top margin-bottom class="animated fadeIn">
           <ion-card-content no-padding>
             <div id="map" class="map"></div>
@@ -47,10 +47,10 @@
             </ion-card-title>
 
             <ion-text color="dark" margin-bottom>
-              <p>Test 5</p>
+              <p>{{ immo.description }}</p>
             </ion-text>
             <ion-text color="dark" margin-bottom>
-              <p>Test 6</p>
+              <p>{{ immo.location_text }}</p>
             </ion-text>
 
           </ion-card-content>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GeoService } from '../../services/geolocalisation/geo.service';
 import { GeoJson, FeatureCollection } from '../../map';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ImmoService } from '../../services/immo/immo.service';
 import * as mapboxgl from 'mapbox-gl';
 import {
   trigger,
@@ -10,6 +12,8 @@ import {
   query,
   stagger
 } from '@angular/animations';
+import {ActionSheetController, ModalController, NavController, ToastController} from '@ionic/angular';
+import { ImagePage } from '../../image/image.page';
 
 @Component({
   selector: 'app-details-item',
@@ -26,6 +30,10 @@ import {
 })
 export class DetailsItemComponent implements OnInit {
 
+  immo: any;
+  immoID: any = this.route.snapshot.paramMap.get('id');
+  immoSegment: string = 'details';
+
   /// default settings
   map: mapboxgl.Map;
   style = 'mapbox://styles/mapbox/streets-v11';
@@ -37,12 +45,100 @@ export class DetailsItemComponent implements OnInit {
   source: any;
   markers: any;
 
-  constructor(private mapService: GeoService) {
+  constructor(private mapService: GeoService,
+              public navCtrl: NavController,
+              public asCtrl: ActionSheetController,
+              public toastCtrl: ToastController,
+              public modalCtrl: ModalController,
+              public immos: ImmoService,
+              public route: ActivatedRoute,
+              public router: Router) {
+    this.immo = this.immos.getItem(this.immoID);
   }
 
   ngOnInit() {
     this.initializeMap();
+    console.log(this.immo);
   }
+
+  async presentImage(image: any) {
+    const modal = await this.modalCtrl.create({
+      component: ImagePage,
+      componentProps: { value: image }
+    });
+    return await modal.present();
+  }
+
+  async favorite(hotel) {
+
+    this.immos.favorite(hotel)
+        .then(async property => {
+          const toast = await this.toastCtrl.create({
+            showCloseButton: true,
+            message: 'Le bien à été ajouté à vos favoris',
+            duration: 950,
+            position: 'bottom'
+          });
+
+          toast.present();
+        });
+  }
+
+  async share() {
+    const actionSheet = await this.asCtrl.create({
+      header: 'Partager:',
+      buttons: [{
+        text: 'Facebook',
+        role: 'facebook',
+        icon: 'logo-facebook',
+        handler: () => {
+          console.log('Facebook clicked');
+        }
+      }, {
+        text: 'Twitter',
+        icon: 'logo-twitter',
+        handler: () => {
+          console.log('Twitter clicked');
+        }
+      }, {
+        text: 'Google+',
+        icon: 'logo-googleplus',
+        handler: () => {
+          console.log('Google+ clicked');
+        }
+      }, {
+        text: 'Instagram',
+        icon: 'logo-instagram',
+        handler: () => {
+          console.log('Instagram clicked');
+        }
+      }, {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
+  }
+
+  range(n) {
+    return new Array(n);
+  }
+
+  avgRating() {
+    let average: number = 0;
+
+    this.immo.reviews.forEach((val: any, key: any) => {
+      average += val.rating;
+    });
+
+    return average / this.immo.reviews.length;
+  }
+
+
 
   private initializeMap() {
     //Situé l'utilisateur
@@ -128,4 +224,6 @@ export class DetailsItemComponent implements OnInit {
 
     });
   }
+
+
 }

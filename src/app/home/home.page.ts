@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { ImmoService } from '../services/immo/immo.service';
 
 @Component({
   selector: 'app-home',
@@ -7,11 +8,11 @@ import {Component, OnInit} from '@angular/core';
 })
 export class HomePage implements OnInit {
 
-  constructor() {}
-
-  ngOnInit() {
-
+  constructor(public immos: ImmoService) {
+    this.immos = immos.getAll();
   }
+
+  ngOnInit() {  }
 
 
 }
