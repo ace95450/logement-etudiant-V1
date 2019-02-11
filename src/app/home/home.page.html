@@ -21,7 +21,7 @@
 
 <ion-content>
   <ion-text color="primary">
-    <h3><ion-icon size="small" color="dark" name="bookmark"></ion-icon>Les dernières annonces</h3>
+    <h3><ion-icon size="small" color="dark" name="bookmark"></ion-icon>Les têtes d'affiche</h3>
   </ion-text>
 
   <ion-slides pager="true" margin-bottom>
@@ -56,5 +56,33 @@
 
     </ion-slide>
   </ion-slides>
+
+  <hr class="bg-tertiary">
+
+  <ion-text color="primary">
+    <h3><ion-icon size="small" color="dark" name="bookmarks"></ion-icon> Dernier ajouts</h3>
+  </ion-text>
+
+  <ion-card>
+    <ion-list>
+      <ion-item color="dark" tappable routerLink="/details-item">
+        <ion-thumbnail slot="start">
+          <img src="../../assets/img/louvre-1210004_640.jpg">
+        </ion-thumbnail>
+        <ion-label>
+          <h2><strong>Le Charme du Louvre</strong></h2>
+          <h3>
+            <ion-badge slot="start" color="secondary" class="rooms">
+              <ion-icon name="book" color="tertiary"></ion-icon>
+              Toujours dispo | 4 chambres
+            </ion-badge>
+          </h3>
+          <ion-badge color="warning">
+            <ion-icon name="star"></ion-icon> 5
+          </ion-badge>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
 
 </ion-content>
