@@ -24,7 +24,9 @@ const routes: Routes = [
   {
     path: 'details-item',
     component: DetailsItemComponent
-  },  { path: 'image', loadChildren: './image/image.module#ImagePageModule' }
+  },
+  { path: 'details-item/:id', component: DetailsItemComponent },
+  { path: 'image', loadChildren: './image/image.module#ImagePageModule' }
 
 ];
 

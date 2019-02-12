@@ -225,5 +225,17 @@ export class DetailsItemComponent implements OnInit {
     });
   }
 
+  /// Helpers
+
+  removeMarker(marker) {
+    this.mapService.removeMarker(marker.$key);
+  }
+
+  flyTo(data: GeoJson) {
+    this.map.flyTo({
+      center: data.geometry.coordinates
+    });
+  }
+
 
 }

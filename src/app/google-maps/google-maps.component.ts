@@ -65,7 +65,7 @@ export class GoogleMapsComponent implements OnInit{
       const coordinates = [event.lngLat.lng, event.lngLat.lat]
       const newMarker   = new GeoJson(coordinates, { message: this.message });
       this.mapService.createMarker(newMarker);
-    })
+    });
 
 
     /// Add realtime firebase data on map load

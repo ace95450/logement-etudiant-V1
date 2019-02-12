@@ -63,20 +63,20 @@
 
   <ion-card>
     <ion-list>
-      <ion-item color="dark" tappable routerLink="/details-item">
+      <ion-item color="dark" tappable routerLink="/details-item/{{immo.id}}" *ngFor="let immo of immos | slice:0:4; let i = index">
         <ion-thumbnail slot="start">
-          <img src="../../assets/img/louvre-1210004_640.jpg">
+          <img [src]="immo.thumb">
         </ion-thumbnail>
         <ion-label>
-          <h2><strong>Le Charme du Louvre</strong></h2>
+          <h2><strong>{{immo.name}}</strong></h2>
           <h3>
             <ion-badge slot="start" color="secondary" class="rooms">
               <ion-icon name="book" color="tertiary"></ion-icon>
-              Toujours dispo | 4 chambres
+              {{ immo.numb_available_rooms }} | 4 chambres
             </ion-badge>
           </h3>
           <ion-badge color="warning">
-            <ion-icon name="star"></ion-icon> 5
+            <ion-icon name="star"></ion-icon> {{ immo.rating }}
           </ion-badge>
         </ion-label>
       </ion-item>
